@@ -9,6 +9,8 @@ const TodoForm = (props) => {
         name="todoInput"
         onChange={props.handleChanges}
         placeholder="Enter Task"
+        autoComplete="off"
+        required
       />
       <button>Add Todo</button>
       <button onClick={props.clearTodos}>Clear Completed</button>

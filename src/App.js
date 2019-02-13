@@ -39,8 +39,6 @@ class App extends React.Component {
   addTodo = (e) => {
     e.preventDefault();
 
-    if (this.state.todoInput === '') return;
-
     const newTodo = {
       task: this.state.todoInput,
       id: Date.now(),
