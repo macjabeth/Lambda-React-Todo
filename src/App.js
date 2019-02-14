@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoForm from './components/TodoComponents/TodoForm';
 import TodoList from './components/TodoComponents/TodoList';
+import SimpleStorage from 'react-simple-storage';
 
 import './App.css';
 
@@ -31,9 +32,7 @@ class App extends React.Component {
   };
 
   handleChanges = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   addTodo = (e) => {
@@ -45,10 +44,9 @@ class App extends React.Component {
       completed: false
     }
 
-    this.setState({
-      todos: [...this.state.todos, newTodo],
-      todoInput: ''
-    });
+    const todos = [...this.state.todos, newTodo];
+
+    this.setState({ todos, todoInput: '' });
   };
 
   toggleComplete = (e, id) => {
@@ -71,16 +69,19 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="app-container">
-        <h1>todos</h1>
-        <TodoList todos={this.state.todos} toggleComplete={this.toggleComplete} />
-        <TodoForm
-          todoInput={this.state.todoInput}
-          handleChanges={this.handleChanges}
-          addTodo={this.addTodo}
-          clearTodos={this.clearTodos}
-        />
-      </div>
+      <React.Fragment>
+        <SimpleStorage parent={this} />
+        <div className="app-container">
+          <h1>todos</h1>
+          <TodoList todos={this.state.todos} toggleComplete={this.toggleComplete} />
+          <TodoForm
+            todoInput={this.state.todoInput}
+            handleChanges={this.handleChanges}
+            addTodo={this.addTodo}
+            clearTodos={this.clearTodos}
+          />
+        </div>
+      </React.Fragment>
     );
   }
 }
