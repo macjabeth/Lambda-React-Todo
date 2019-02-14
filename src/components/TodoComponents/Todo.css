@@ -6,6 +6,7 @@
 
 .form-wrapper > input {
   background-color: #17181c;
+  color: #fff;
   border-radius: 5px;
   border: 1px solid #525252;
   padding: 1em 2em;
@@ -22,11 +23,19 @@
   cursor: pointer;
   position: absolute;
   transition: 100ms;
+  right: 35px;
+}
+
+.form-wrapper > i:last-child {
   right: 15px;
 }
 
 .form-wrapper > i:hover {
   color: #fff;
+}
+
+.form-wrapper > i.enabled {
+  color: #556b2f;
 }
 
 .todo-list {
@@ -53,7 +62,7 @@
   height: 1px;
   top: 50%;
   margin-top: -0.5px;
-  background: black;
+  background: orange;
 }
 
 .todo-item:before {
@@ -62,12 +71,12 @@
 
 .todo-item:after {
   right: 2.5px;
-  background: black;
+  background: orange;
   transition: width 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .todo-item.completed:before {
-  background: black;
+  background: orange;
   width: calc(100% - 5px);
   transition: width 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
 }

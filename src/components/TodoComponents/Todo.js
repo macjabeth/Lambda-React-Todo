@@ -8,7 +8,7 @@ function Todo(props) {
   if (props.completed) classList.push("completed");
 
   return (
-    <li className={classList.join(" ")} onClick={e => props.toggleComplete(e, props.id)} >
+    <li className={classList.join(" ")} onClick={() => props.toggleComplete(props.id)} >
       {props.task}
     </li>
   );

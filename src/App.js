@@ -11,6 +11,7 @@ class App extends React.Component {
     super();
     this.state = {
       todoInput: '',
+      searching: false,
       todos: [
         {
           task: 'Organize Garage',
@@ -26,12 +27,14 @@ class App extends React.Component {
     };
   }
 
-  handleChanges = e => {
+  handleChanges = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  addTodo = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
+
+    if (this.state.searching) return;
 
     this.setState(state => ({
       todoInput: '',
@@ -46,7 +49,7 @@ class App extends React.Component {
     }));
   };
 
-  toggleComplete = (e, id) => {
+  toggleComplete = (id) => {
     this.setState(state => ({
       todos: state.todos.map(todo =>
         todo.id === id
@@ -59,13 +62,17 @@ class App extends React.Component {
     }));
   };
 
-  clearTodos = e => {
-    e.preventDefault();
-
+  clearTodos = () => {
     this.setState(state => ({
       todos: state.todos.filter(todo => !todo.completed)
     }));
   };
+
+  toggleSearch = () => {
+    this.setState(state => ({
+      searching: !state.searching
+    }));
+  }
 
   render() {
     return (
@@ -76,12 +83,16 @@ class App extends React.Component {
           <TodoForm
             todoInput={this.state.todoInput}
             handleChanges={this.handleChanges}
-            addTodo={this.addTodo}
+            handleSubmit={this.handleSubmit}
             clearTodos={this.clearTodos}
+            toggleSearch={this.toggleSearch}
+            searching={this.state.searching}
           />
           <TodoList
             todos={this.state.todos}
             toggleComplete={this.toggleComplete}
+            searching={this.state.searching}
+            todoInput={this.state.todoInput}
           />
         </div>
       </React.Fragment>
