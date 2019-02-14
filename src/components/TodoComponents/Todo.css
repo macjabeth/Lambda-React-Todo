@@ -1,0 +1,77 @@
+.todo-list {
+  margin: 10px 0;
+}
+
+.todo-item {
+  margin: 5px 0;
+  display: block;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #eee;
+}
+
+.todo-item:before, .todo-item:after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 1px;
+  top: 50%;
+  margin-top: -0.5px;
+  background: black;
+}
+
+.todo-item:before {
+  left: -2.5px;
+}
+
+.todo-item:after {
+  right: 2.5px;
+  background: black;
+  transition: width 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.todo-item.completed:before {
+  background: black;
+  width: 100%;
+  transition: width 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.todo-item.completed:after {
+  background: transparent;
+  width: 100%;
+  transition: 0s;
+}
+
+.todo-item:nth-child(even) {
+  background-color: #ddd;
+}
+
+.form-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.form-wrapper > input {
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 1em 2em;
+  width: 100%;
+  outline: none;
+}
+
+.form-wrapper > i {
+  color: grey;
+  cursor: pointer;
+  position: absolute;
+  transition: 100ms;
+  right: 15px;
+}
+
+.form-wrapper > i:hover {
+  color: black;
+}
