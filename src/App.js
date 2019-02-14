@@ -2,7 +2,7 @@ import React from 'react';
 import TodoForm from './components/TodoComponents/TodoForm';
 import TodoList from './components/TodoComponents/TodoList';
 
-import './app.css';
+import './App.css';
 
 const todos = [
   {
@@ -22,7 +22,7 @@ class App extends React.Component {
   // design `App` to be the parent component of your application.
   // this component is going to take care of state, and any change handlers you need to work with your state
 
-  constructor(){
+  constructor() {
     super();
     this.state = {
       todos: todos,
@@ -51,19 +51,29 @@ class App extends React.Component {
     });
   };
 
+  toggleComplete = (e, id) => {
+    this.setState({
+      ...this.state,
+      todos: this.state.todos.map(todo => todo.id === id ? {
+        ...todo, completed: !todo.completed
+      } : todo)
+    })
+  }
+
   clearTodos = (e) => {
     e.preventDefault();
 
     this.setState({
-      todos: []
+      ...this.state,
+      todos: this.state.todos.filter(todo => !todo.completed)
     });
   }
 
   render() {
     return (
       <div className="app-container">
-        <h1>Todo List</h1>
-        <TodoList todos={this.state.todos} />
+        <h1>todos</h1>
+        <TodoList todos={this.state.todos} toggleComplete={this.toggleComplete} />
         <TodoForm
           todoInput={this.state.todoInput}
           handleChanges={this.handleChanges}

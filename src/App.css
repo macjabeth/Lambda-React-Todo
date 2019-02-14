@@ -1,0 +1,22 @@
+@import 'minireset.min.css';
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  background-color: #f5f5f5;
+  line-height: 1.5;
+}
+
+.app-container {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.app-container > h1 {
+  font-variant: small-caps;
+  font-size: 5rem;
+}

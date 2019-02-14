@@ -1,8 +1,10 @@
 import React from 'react';
 
+import './Todo.css';
+
 const TodoForm = (props) => {
   return (
-    <form onSubmit={props.addTodo}>
+    <form className="todo-form" onSubmit={props.addTodo}>
       <input
         type="text"
         value={props.todoInput}
@@ -12,6 +14,7 @@ const TodoForm = (props) => {
         autoComplete="off"
         required
       />
+      <br />
       <button>Add Todo</button>
       <button onClick={props.clearTodos}>Clear Completed</button>
     </form>

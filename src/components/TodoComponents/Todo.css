@@ -1,0 +1,14 @@
+.todo-item {
+  cursor: pointer;
+}
+
+.todo-item.completed {
+  text-decoration: line-through;
+}
+
+.todo-form > input {
+  margin: 5px 0;
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 5px;
+}
