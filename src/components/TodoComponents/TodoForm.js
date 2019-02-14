@@ -15,7 +15,7 @@ const TodoForm = (props) => {
           autoComplete="off"
           required
         />
-        <i className="far fa-trash-alt" onClick={props.clearTodos}></i>
+        <i className="far fa-trash-alt" onClick={props.clearTodos} title="Clear Completed Tasks"></i>
       </div>
     </form>
   );
