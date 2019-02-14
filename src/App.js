@@ -1,30 +1,28 @@
-import React from "react";
-import TodoForm from "./components/TodoComponents/TodoForm";
-import TodoList from "./components/TodoComponents/TodoList";
-import SimpleStorage from "react-simple-storage";
+import React from 'react';
+import TodoForm from './components/TodoComponents/TodoForm';
+import TodoList from './components/TodoComponents/TodoList';
+import SimpleStorage from 'react-simple-storage';
 
-import "./minireset.css";
-import "./App.css";
-
-const todos = [
-  {
-    task: "Organize Garage",
-    id: 1528817077286,
-    completed: false
-  },
-  {
-    task: "Bake Cookies",
-    id: 1528817084358,
-    completed: false
-  }
-];
+import './minireset.css';
+import './App.css';
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      todos: todos,
-      todoInput: ""
+      todoInput: '',
+      todos: [
+        {
+          task: 'Organize Garage',
+          id: 1528817077286,
+          completed: false
+        },
+        {
+          task: 'Bake Cookies',
+          id: 1528817084358,
+          completed: false
+        }
+      ]
     };
   }
 
@@ -36,12 +34,15 @@ class App extends React.Component {
     e.preventDefault();
 
     this.setState(state => ({
-      todos: [...state.todos, {
-        task: state.todoInput,
-        id: Date.now(),
-        completed: false
-      }],
-      todoInput: ""
+      todoInput: '',
+      todos: [
+        ...state.todos,
+        {
+          task: state.todoInput,
+          id: Date.now(),
+          completed: false
+        }
+      ]
     }));
   };
 
