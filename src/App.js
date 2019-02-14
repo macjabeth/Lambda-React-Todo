@@ -35,20 +35,19 @@ class App extends React.Component {
   addTodo = e => {
     e.preventDefault();
 
-    const newTodo = {
-      task: this.state.todoInput,
-      id: Date.now(),
-      completed: false
-    };
-
-    const todos = [...this.state.todos, newTodo];
-
-    this.setState({ todos, todoInput: "" });
+    this.setState(state => ({
+      todos: [...state.todos, {
+        task: state.todoInput,
+        id: Date.now(),
+        completed: false
+      }],
+      todoInput: ""
+    }));
   };
 
   toggleComplete = (e, id) => {
-    this.setState({
-      todos: this.state.todos.map(todo =>
+    this.setState(state => ({
+      todos: state.todos.map(todo =>
         todo.id === id
           ? {
               ...todo,
@@ -56,15 +55,15 @@ class App extends React.Component {
             }
           : todo
       )
-    });
+    }));
   };
 
   clearTodos = e => {
     e.preventDefault();
 
-    this.setState({
-      todos: this.state.todos.filter(todo => !todo.completed)
-    });
+    this.setState(state => ({
+      todos: state.todos.filter(todo => !todo.completed)
+    }));
   };
 
   render() {
