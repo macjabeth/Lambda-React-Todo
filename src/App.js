@@ -48,7 +48,6 @@ class App extends React.Component {
 
   toggleComplete = (e, id) => {
     this.setState({
-      ...this.state,
       todos: this.state.todos.map(todo =>
         todo.id === id
           ? {
@@ -64,7 +63,6 @@ class App extends React.Component {
     e.preventDefault();
 
     this.setState({
-      ...this.state,
       todos: this.state.todos.filter(todo => !todo.completed)
     });
   };
