@@ -73,13 +73,13 @@ class App extends React.Component {
         <SimpleStorage parent={this} />
         <div className="app-container">
           <h1>todos</h1>
-          <TodoList todos={this.state.todos} toggleComplete={this.toggleComplete} />
           <TodoForm
             todoInput={this.state.todoInput}
             handleChanges={this.handleChanges}
             addTodo={this.addTodo}
             clearTodos={this.clearTodos}
           />
+          <TodoList todos={this.state.todos} toggleComplete={this.toggleComplete} />
         </div>
       </React.Fragment>
     );

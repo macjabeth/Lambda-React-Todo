@@ -1,14 +1,46 @@
+.todo-list {
+  margin: 10px 0;
+}
+
 .todo-item {
+  margin: 5px 0;
   cursor: pointer;
+  user-select: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #eee;
+}
+
+.todo-item:nth-child(even) {
+  background-color: #ddd;
 }
 
 .todo-item.completed {
   text-decoration: line-through;
 }
 
-.todo-form > input {
-  margin: 5px 0;
+.form-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.form-wrapper > input {
   border-radius: 5px;
   border: 1px solid black;
-  padding: 5px;
+  padding: 1em 2em;
+  width: 100%;
+  outline: none;
+}
+
+.form-wrapper > i {
+  color: grey;
+  cursor: pointer;
+  position: absolute;
+  right: 15px;
+}
+
+.form-wrapper > i:hover {
+  color: black;
 }
