@@ -1,10 +1,16 @@
-import React from 'react';
+import React from "react";
 
-import './Todo.css';
+import "./Todo.css";
 
 function Todo(props) {
+  const classList = ["todo-item"];
+
+  if (props.completed) classList.push("completed");
+
   return (
-    <li className={`todo-item${props.completed ? " completed" : ""}`} onClick={(e) => props.toggleComplete(e, props.id)}>{props.task}</li>
+    <li className={classList.join(" ")} onClick={e => props.toggleComplete(e, props.id)} >
+      {props.task}
+    </li>
   );
 }
 
