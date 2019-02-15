@@ -18,7 +18,11 @@ const TodoForm = props => {
           autoComplete="off"
           required
         />
-        <i className={searchClassList.join(' ')} onClick={props.toggleSearch} />
+        <i
+          className={searchClassList.join(' ')}
+          onClick={props.toggleSearch}
+          title="Filter Results"
+        />
         <i className="far fa-trash-alt" onClick={props.clearTodos} title="Clear Completed Tasks" />
       </div>
     </form>

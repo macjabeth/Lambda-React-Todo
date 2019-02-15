@@ -54,43 +54,17 @@
   border-radius: 5px;
   padding: 5px;
   background-color: #1b1d22;
-}
-
-.todo-item:before,
-.todo-item:after {
-  content: '';
-  position: absolute;
-  width: 0%;
-  height: 1px;
-  top: 50%;
-  margin-top: -0.5px;
-  background: orange;
-}
-
-.todo-item:before {
-  left: 20%;
-}
-
-.todo-item:after {
-  right: 20%;
-  background: orange;
-  transition: width 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-
-.todo-item.completed:before {
-  background: orange;
-  width: 60%;
-  transition: width 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-
-.todo-item.completed:after {
-  background: transparent;
-  width: 60%;
-  transition: 0s;
+  transition: 250ms;
+  text-decoration: line-through;
+  text-decoration-color: transparent;
 }
 
 .todo-item:nth-child(even) {
   background-color: #1f2228;
+}
+
+.todo-item.completed {
+  text-decoration-color: initial;
 }
 
 .todo-item > .fa-edit {

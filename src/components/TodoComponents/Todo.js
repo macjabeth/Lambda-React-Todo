@@ -60,7 +60,11 @@ class Todo extends React.Component {
             <input value={this.state.todoInput} onChange={this.handleChange} ref="todoInput" />
           </form>
         )}
-        <i className={editClassList.join(' ')} onClick={e => this.toggleEdit(e, this.props.task)} />
+        <i
+          className={editClassList.join(' ')}
+          onClick={e => this.toggleEdit(e, this.props.task)}
+          title="Edit"
+        />
       </li>
     );
   }
