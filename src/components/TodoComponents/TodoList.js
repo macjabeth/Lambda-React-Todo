@@ -3,17 +3,20 @@ import Todo from './Todo';
 
 import './Todo.css';
 
-const TodoList = (props) => (
+const TodoList = props => (
   <ul className="todo-list">
-    {props.todos.map((todoItem, index) => (
-      <Todo
-        key={index}
-        id={todoItem.id}
-        task={todoItem.task}
-        completed={todoItem.completed}
-        toggleComplete={props.toggleComplete}
-      />
-    ))}
+    {props.todos.map((todoItem, index) =>
+      (props.searching && todoItem.task.includes(props.todoInput)) || !props.searching ? (
+        <Todo
+          key={index}
+          id={todoItem.id}
+          task={todoItem.task}
+          completed={todoItem.completed}
+          editTodo={props.editTodo}
+          toggleComplete={props.toggleComplete}
+        />
+      ) : null
+    )}
   </ul>
 );
 

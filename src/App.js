@@ -1,30 +1,29 @@
-import React from "react";
-import TodoForm from "./components/TodoComponents/TodoForm";
-import TodoList from "./components/TodoComponents/TodoList";
-import SimpleStorage from "react-simple-storage";
+import React from 'react';
+import TodoForm from './components/TodoComponents/TodoForm';
+import TodoList from './components/TodoComponents/TodoList';
+import SimpleStorage from 'react-simple-storage';
 
-import "./minireset.css";
-import "./App.css";
-
-const todos = [
-  {
-    task: "Organize Garage",
-    id: 1528817077286,
-    completed: false
-  },
-  {
-    task: "Bake Cookies",
-    id: 1528817084358,
-    completed: false
-  }
-];
+import './minireset.css';
+import './App.css';
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      todos: todos,
-      todoInput: ""
+      todoInput: '',
+      searching: false,
+      todos: [
+        {
+          task: 'Organize Garage',
+          id: 1528817077286,
+          completed: false
+        },
+        {
+          task: 'Bake Cookies',
+          id: 1528817084358,
+          completed: false
+        }
+      ]
     };
   }
 
@@ -32,20 +31,41 @@ class App extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  addTodo = e => {
+  handleSubmit = e => {
     e.preventDefault();
 
+    if (this.state.searching) return;
+
     this.setState(state => ({
-      todos: [...state.todos, {
-        task: state.todoInput,
-        id: Date.now(),
-        completed: false
-      }],
-      todoInput: ""
+      todoInput: '',
+      todos: [
+        ...state.todos,
+        {
+          task: state.todoInput,
+          id: Date.now(),
+          completed: false
+        }
+      ]
     }));
   };
 
-  toggleComplete = (e, id) => {
+  editTodo = (e, id, task) => {
+    e.preventDefault();
+
+    this.setState(state => ({
+      todos: state.todos.map(todo =>
+        todo.id === id
+          ? {
+              ...todo,
+              task
+            }
+          : todo
+      )
+    }));
+  };
+
+  toggleComplete = (id, editing) => {
+    if (editing) return;
     this.setState(state => ({
       todos: state.todos.map(todo =>
         todo.id === id
@@ -58,11 +78,15 @@ class App extends React.Component {
     }));
   };
 
-  clearTodos = e => {
-    e.preventDefault();
-
+  clearTodos = () => {
     this.setState(state => ({
       todos: state.todos.filter(todo => !todo.completed)
+    }));
+  };
+
+  toggleSearch = () => {
+    this.setState(state => ({
+      searching: !state.searching
     }));
   };
 
@@ -75,12 +99,17 @@ class App extends React.Component {
           <TodoForm
             todoInput={this.state.todoInput}
             handleChanges={this.handleChanges}
-            addTodo={this.addTodo}
+            handleSubmit={this.handleSubmit}
             clearTodos={this.clearTodos}
+            toggleSearch={this.toggleSearch}
+            searching={this.state.searching}
           />
           <TodoList
             todos={this.state.todos}
+            editTodo={this.editTodo}
             toggleComplete={this.toggleComplete}
+            searching={this.state.searching}
+            todoInput={this.state.todoInput}
           />
         </div>
       </React.Fragment>

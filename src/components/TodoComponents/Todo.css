@@ -1,55 +1,3 @@
-.todo-list {
-  margin: 10px 0;
-}
-
-.todo-item {
-  margin: 5px 0;
-  display: block;
-  position: relative;
-  cursor: pointer;
-  user-select: none;
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 5px;
-  background-color: #eee;
-}
-
-.todo-item:before, .todo-item:after {
-  content: '';
-  position: absolute;
-  width: 0%;
-  height: 1px;
-  top: 50%;
-  margin-top: -0.5px;
-  background: black;
-}
-
-.todo-item:before {
-  left: -2.5px;
-}
-
-.todo-item:after {
-  right: 2.5px;
-  background: black;
-  transition: width 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-
-.todo-item.completed:before {
-  background: black;
-  width: 100%;
-  transition: width 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-
-.todo-item.completed:after {
-  background: transparent;
-  width: 100%;
-  transition: 0s;
-}
-
-.todo-item:nth-child(even) {
-  background-color: #ddd;
-}
-
 .form-wrapper {
   position: relative;
   display: flex;
@@ -57,21 +5,88 @@
 }
 
 .form-wrapper > input {
+  background-color: #17181c;
+  color: #fff;
   border-radius: 5px;
-  border: 1px solid black;
+  border: 1px solid #525252;
   padding: 1em 2em;
   width: 100%;
   outline: none;
 }
 
+.form-wrapper > input::placeholder {
+  color: #fff;
+}
+
 .form-wrapper > i {
-  color: grey;
+  color: #ccc;
   cursor: pointer;
   position: absolute;
   transition: 100ms;
+  right: 40px;
+}
+
+.form-wrapper > i:last-child {
   right: 15px;
 }
 
 .form-wrapper > i:hover {
-  color: black;
+  color: #fff;
+}
+
+.form-wrapper > i.enabled {
+  color: #556b2f;
+}
+
+.todo-list {
+  margin: 10px 0;
+}
+
+.todo-item {
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid #525252;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #1b1d22;
+  transition: 250ms;
+  text-decoration: line-through;
+  text-decoration-color: transparent;
+}
+
+.todo-item:nth-child(even) {
+  background-color: #1f2228;
+}
+
+.todo-item.completed {
+  text-decoration-color: initial;
+}
+
+.todo-item > .fa-edit {
+  color: #ccc;
+  display: none;
+  position: absolute;
+  right: 10px;
+}
+
+.todo-item > .fa-edit:hover {
+  color: #fff;
+}
+
+.todo-item > .fa-edit.display {
+  display: block;
+}
+
+.todo-item input {
+  border: none;
+  background-color: inherit;
+  color: inherit;
+  font-family: inherit;
+  text-align: center;
+  font-size: inherit;
 }
