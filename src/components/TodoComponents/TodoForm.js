@@ -2,10 +2,9 @@ import React from 'react';
 
 import './Todo.css';
 
-const TodoForm = (props) => {
-  const searchClassList = ['fas fa-search'];
-
-  if (props.searching) searchClassList.push('enabled');
+const TodoForm = props => {
+  const placeholder = props.searching ? 'Filter...' : 'What needs to be done?';
+  const searchClassList = ['fas fa-search', ...(props.searching ? ['enabled'] : [])];
 
   return (
     <form className="todo-form" onSubmit={props.handleSubmit}>
@@ -15,12 +14,12 @@ const TodoForm = (props) => {
           value={props.todoInput}
           name="todoInput"
           onChange={props.handleChanges}
-          placeholder="What needs to be done?"
+          placeholder={placeholder}
           autoComplete="off"
           required
         />
-        <i className={searchClassList.join(' ')} onClick={props.toggleSearch}></i>
-        <i className="far fa-trash-alt" onClick={props.clearTodos} title="Clear Completed Tasks"></i>
+        <i className={searchClassList.join(' ')} onClick={props.toggleSearch} />
+        <i className="far fa-trash-alt" onClick={props.clearTodos} title="Clear Completed Tasks" />
       </div>
     </form>
   );

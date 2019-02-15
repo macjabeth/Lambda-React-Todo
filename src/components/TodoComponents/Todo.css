@@ -23,7 +23,7 @@
   cursor: pointer;
   position: absolute;
   transition: 100ms;
-  right: 35px;
+  right: 40px;
 }
 
 .form-wrapper > i:last-child {
@@ -44,7 +44,9 @@
 
 .todo-item {
   margin: 5px 0;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   cursor: pointer;
   user-select: none;
@@ -66,27 +68,51 @@
 }
 
 .todo-item:before {
-  left: 2.5px;
+  left: 20%;
 }
 
 .todo-item:after {
-  right: 2.5px;
+  right: 20%;
   background: orange;
   transition: width 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .todo-item.completed:before {
   background: orange;
-  width: calc(100% - 5px);
+  width: 60%;
   transition: width 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .todo-item.completed:after {
   background: transparent;
-  width: calc(100% - 5px);
+  width: 60%;
   transition: 0s;
 }
 
 .todo-item:nth-child(even) {
   background-color: #1f2228;
+}
+
+.todo-item > .fa-edit {
+  color: #ccc;
+  display: none;
+  position: absolute;
+  right: 10px;
+}
+
+.todo-item > .fa-edit:hover {
+  color: #fff;
+}
+
+.todo-item > .fa-edit.display {
+  display: block;
+}
+
+.todo-item input {
+  border: none;
+  background-color: inherit;
+  color: inherit;
+  font-family: inherit;
+  text-align: center;
+  font-size: inherit;
 }

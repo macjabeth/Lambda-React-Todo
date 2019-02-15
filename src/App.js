@@ -27,11 +27,11 @@ class App extends React.Component {
     };
   }
 
-  handleChanges = (e) => {
+  handleChanges = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
 
     if (this.state.searching) return;
@@ -49,7 +49,23 @@ class App extends React.Component {
     }));
   };
 
-  toggleComplete = (id) => {
+  editTodo = (e, id, task) => {
+    e.preventDefault();
+
+    this.setState(state => ({
+      todos: state.todos.map(todo =>
+        todo.id === id
+          ? {
+              ...todo,
+              task
+            }
+          : todo
+      )
+    }));
+  };
+
+  toggleComplete = (id, editing) => {
+    if (editing) return;
     this.setState(state => ({
       todos: state.todos.map(todo =>
         todo.id === id
@@ -72,7 +88,7 @@ class App extends React.Component {
     this.setState(state => ({
       searching: !state.searching
     }));
-  }
+  };
 
   render() {
     return (
@@ -90,6 +106,7 @@ class App extends React.Component {
           />
           <TodoList
             todos={this.state.todos}
+            editTodo={this.editTodo}
             toggleComplete={this.toggleComplete}
             searching={this.state.searching}
             todoInput={this.state.todoInput}
