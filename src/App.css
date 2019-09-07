@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light|Telex&display=swap');
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: #713E5A;
+  padding: 15px !important;
+  font-family: 'Telex', sans-serif;
+  line-height: 1.5;
+}
+
+.app {
+  width: 100%;
+  max-width: 500px;
+  margin: 5vh auto;
+  height: calc(90vh - 30px);
+  background-color: #EDC79B;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.app > h2 {
+  font-size: 5rem;
+  font-weight: bold;
+  font-family: 'Shadows Into Light', cursive;
+  font-variant: small-caps;
+  padding: 25px 0;
+  color: #333;
+}
+
+.warning {
+  color: red;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 5px;
+}
