@@ -1,0 +1,22 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  background-color: #1a1b1f;
+  color: #e8e7e3;
+  line-height: 1.5;
+}
+
+.app-container {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.app-container > h1 {
+  text-transform: uppercase;
+  font-size: 5rem;
+}
