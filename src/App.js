@@ -2,11 +2,23 @@ import React from 'react';
 import TodoList from './components/TodoList';
 import TodoForm from './components/TodoForm';
 
+function getTodos() {
+  const todos = localStorage.getItem('todos');
+  return todos ? JSON.parse(todos) : [];
+}
+
 class App extends React.Component {
   state = {
-    todos: [],
+    todos: getTodos(),
     newTodo: ''
   };
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    // update localStorage if we add or remove any todos
+    if (this.state.todos.length !== prevState.todos.length) {
+      localStorage.setItem('todos', JSON.stringify(this.state.todos));
+    }
+  }
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -37,7 +49,10 @@ class App extends React.Component {
     this.setState(state => ({
       ...state,
       todos: newTodos
-    }));
+    }), () => {
+      // update localStorage after toggling a todo
+      localStorage.setItem('todos', JSON.stringify(newTodos));
+    });
   };
 
   clearCompleted = () => {
