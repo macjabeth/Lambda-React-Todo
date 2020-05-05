@@ -1,118 +1,81 @@
 import React from 'react';
-import TodoForm from './components/TodoComponents/TodoForm';
-import TodoList from './components/TodoComponents/TodoList';
-import SimpleStorage from 'react-simple-storage';
+import TodoList from './components/TodoList';
+import TodoForm from './components/TodoForm';
 
-import './minireset.css';
-import './App.css';
+function getTodos() {
+  const todos = localStorage.getItem('todos');
+  return todos ? JSON.parse(todos) : [];
+}
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      todoInput: '',
-      searching: false,
-      todos: [
-        {
-          task: 'Organize Garage',
-          id: 1528817077286,
-          completed: false
-        },
-        {
-          task: 'Bake Cookies',
-          id: 1528817084358,
-          completed: false
-        }
-      ]
-    };
+  state = {
+    todos: getTodos(),
+    newTodo: ''
+  };
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    // update localStorage if we add or remove any todos
+    if (this.state.todos.length !== prevState.todos.length) {
+      localStorage.setItem('todos', JSON.stringify(this.state.todos));
+    }
   }
 
-  handleChanges = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+  handleSubmit = (event) => {
+    event.preventDefault();
 
-  handleSubmit = e => {
-    e.preventDefault();
-
-    if (this.state.searching) return;
+    const newTodo = {
+      id: Date.now(),
+      task: this.state.newTodo,
+      completed: false
+    };
 
     this.setState(state => ({
-      todoInput: '',
-      todos: [
-        ...state.todos,
-        {
-          task: state.todoInput,
-          id: Date.now(),
-          completed: false
-        }
-      ]
+      todos: [...state.todos, newTodo],
+      newTodo: ''
     }));
   };
 
-  editTodo = (e, id, task) => {
-    e.preventDefault();
-
-    this.setState(state => ({
-      todos: state.todos.map(todo =>
-        todo.id === id
-          ? {
-              ...todo,
-              task
-            }
-          : todo
-      )
-    }));
+  handleChange = ({ target: { value } }) => {
+    this.setState(state => ({ ...state, newTodo: value }));
   };
 
-  toggleComplete = (id, editing) => {
-    if (editing) return;
+  toggleTodo = (id) => {
+    const newTodos = this.state.todos.filter(
+      todo => todo.id === id
+        ? Object.assign(todo, { completed: !todo.completed })
+        : todo
+    );
+
     this.setState(state => ({
-      todos: state.todos.map(todo =>
-        todo.id === id
-          ? {
-              ...todo,
-              completed: !todo.completed
-            }
-          : todo
-      )
-    }));
+      ...state,
+      todos: newTodos
+    }), () => {
+      // update localStorage after toggling a todo
+      localStorage.setItem('todos', JSON.stringify(newTodos));
+    });
   };
 
-  clearTodos = () => {
+  clearCompleted = () => {
     this.setState(state => ({
+      ...state,
       todos: state.todos.filter(todo => !todo.completed)
     }));
   };
 
-  toggleSearch = () => {
-    this.setState(state => ({
-      searching: !state.searching
-    }));
-  };
-
   render() {
+    const { todos, newTodo } = this.state;
+
     return (
-      <React.Fragment>
-        <SimpleStorage parent={this} />
-        <div className="app-container">
-          <h1>todos</h1>
-          <TodoForm
-            todoInput={this.state.todoInput}
-            handleChanges={this.handleChanges}
-            handleSubmit={this.handleSubmit}
-            clearTodos={this.clearTodos}
-            toggleSearch={this.toggleSearch}
-            searching={this.state.searching}
-          />
-          <TodoList
-            todos={this.state.todos}
-            editTodo={this.editTodo}
-            toggleComplete={this.toggleComplete}
-            searching={this.state.searching}
-            todoInput={this.state.todoInput}
-          />
-        </div>
-      </React.Fragment>
+      <div>
+        <h2>Welcome to your Todo App!</h2>
+        <TodoList todos={todos} toggleTodo={this.toggleTodo} />
+        <TodoForm
+          newTodo={newTodo}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          clearCompleted={this.clearCompleted}
+        />
+      </div>
     );
   }
 }
